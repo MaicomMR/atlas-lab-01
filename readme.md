@@ -19,3 +19,5 @@ Os exercícios devem ser realizados em `.php` e devem ficar armazenados dentro d
 É indicado que os exercícios sejam salvos de acordo com a numeração dos exercícios do Uri
 
 Para rodar o exercício, você pode entrar manualmente no container rodando `docker exec -it php-uri bash`, e então navegar dentro do container até encontrar o teste desejado e então roda-lo manualmente com o comando `php {nome-do-arquivo}.php`
+
+Testing Push 
