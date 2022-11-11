@@ -1,0 +1,10 @@
+version: '3.2'
+
+services:
+  php-uri:
+    build: .
+    container_name: php-uri
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - .:/var/www
