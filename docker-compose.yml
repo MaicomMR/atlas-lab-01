@@ -38,9 +38,9 @@ services:
     ports:
      - "3306:3306"
     environment:
-     - MYSQL_DATABASE=atlas-lab
+     - MYSQL_DATABASE=atlas_lab
      - MYSQL_USER=root
-     - MYSQL_ROOT_PASSWORD=password
+     - MYSQL_ROOT_PASSWORD=user_database
     networks:
      - laravel
     volumes:
