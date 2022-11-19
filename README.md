@@ -1,12 +1,21 @@
 
 # Como iniciar o projeto
 
+1. Buildar os containers do projeto
+`docker-compose up -d --build`
 
-1. Buildar os containers
-`docker-compose up -d`
+2. Criar um env para o projeto
+`cp ./src/.env.example ./src/.env`
 
-2. Dar permissão para executar o script de inicialização
-`sudo chmod -R 777 start.sh`
+3. Acessar o container com o Laravel e instalar as dependências
+`docker exec -it atlas-lab bash`
 
-3. Rodar o script para instalar as dependências e migrações do banco
-`./start.sh`
+4. Instalar dependências do Laravel e PHP
+`composer install`
+
+5. Gerar chave da aplicação
+`php artisan key:generate`
+
+6. Rodar as migrações no banco de dados
+`php artisan migrate`
+
