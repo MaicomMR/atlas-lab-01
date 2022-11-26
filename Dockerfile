@@ -24,8 +24,8 @@ RUN docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 #Install NodeJS
-#RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-#RUN apt-get update && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get update && apt-get install -y nodejs
 # Add user for laravel application
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
