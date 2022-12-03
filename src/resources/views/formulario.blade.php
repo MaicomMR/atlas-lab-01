@@ -1,18 +1,51 @@
-<form action="{{ route('add-compras') }}" method="post">
-    @csrf
-    <input type="text" placeholder="Compra1" name="compra1" style="margin-bottom: 5px">
-    <input type="text" placeholder="valorcompra1" name="valor" style="margin-bottom: 5px"><br>
+@extends('layouts.app')
 
-{{--    <input type="text" placeholder="Compra2" name="compra2" style="margin-bottom: 5px">--}}
-{{--    <input type="text" placeholder="valorcompra2" name="valor2" style="margin-bottom: 5px"><br>--}}
+@section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Dashboard') }}</div>
 
-{{--    <input type="text" placeholder="Compra3" name="compra3" style="margin-bottom: 5px">--}}
-{{--    <input type="text" placeholder="valorcompra3" name="valor3" style="margin-bottom: 5px"><br>--}}
+                    <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <form action="{{ route('add-compras') }}" method="post">
+                                @csrf
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Produto:</span>
+                                    <input value="{{old('compra1')}}" name="compra1" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Valor:</span>
+                                    <input value="{{old('valor')}}" name="valor" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Quantidade:</span>
+                                    <input value="{{old('quantidade')}}" name="quantidade" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                                <button class="btn btn-success" type="submit">Comprar itens</button>
+                            </form>
 
-{{--    <input type="text" placeholder="Compra4" name="compra4" style="margin-bottom: 5px">--}}
-{{--    <input type="text" placeholder="valorcompra4" name="valor4" style="margin-bottom: 5px"><br>--}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 
-    <button type="submit">Comprar itens</button>
-</form>
+
 
 
