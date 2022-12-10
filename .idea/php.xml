@@ -111,6 +111,7 @@
       <path value="$PROJECT_DIR$/src/vendor/egulias/email-validator" />
       <path value="$PROJECT_DIR$/src/vendor/dflydev/dot-access-data" />
       <path value="$PROJECT_DIR$/src/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/src/vendor/laravel/breeze" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

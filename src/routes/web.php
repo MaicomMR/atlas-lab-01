@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,14 +19,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('login');
-Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('Login');
 
-Route::get('/register', function () {
-    return view('auth/register');
-})->name('register');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::prefix('web')->middleware(['logAcesso'])->group(function () {
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+Route::middleware(['auth', 'logAcesso'])->group(function () {
     Route::get('/comprar', [\App\Http\Controllers\ListagemController::class, 'index'])->name('comprar');
     Route::post('/comprar', [\App\Http\Controllers\ListagemController::class, 'comprar'])->name('comprar');
     Route::get('/lista/total', [\App\Http\Controllers\ListagemController::class, 'mostrarLista'])->name('lista-compras');
@@ -33,4 +41,4 @@ Route::prefix('web')->middleware(['logAcesso'])->group(function () {
     Route::post('/lista/add', [\App\Http\Controllers\ListagemController::class, 'comprar'])->name('add-compras');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+require __DIR__.'/auth.php';
