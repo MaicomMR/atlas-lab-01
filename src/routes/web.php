@@ -17,9 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function() {
-   return view('auth/login');
-})->name('login');
+Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('login');
+Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
 Route::get('/register', function () {
     return view('auth/register');

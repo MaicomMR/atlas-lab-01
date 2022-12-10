@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Compra;
+use App\Repositories\CompraRepository;
 use Illuminate\Http\Request;
-use mysql_xdevapi\Exception;
-use Validator;
 
 class ListagemController extends Controller
 {
@@ -37,22 +36,21 @@ class ListagemController extends Controller
          return view('itens');
     }
 
-    public function mostrarLista()
+    public function mostrarLista(CompraRepository $model)
     {
-        $compras = Compra::get();
+        $compras =  $model->all();
         return view('itens', ['compras'=> $compras]);
     }
 
-    public function deletar(Request $request)
+    public function deletar(Request $request, CompraRepository $model)
     {
-        $id = $request->all();
-        dd($id);
-        $delete = Compra::find($id);
-        if($delete === null) {
+        $id = $request->input('delete');
+        $delete = $model->findById($id);
+        if(!$delete) {
             return "Produto não encontrado";
         } else {
-            Compra::find($id)->delete();
-            return redirect()->route('home');
+            $model->deleteById($id);
+            return redirect()->route('mostrarLista');
         }
     }
 
