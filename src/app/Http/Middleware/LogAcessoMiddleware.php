@@ -6,7 +6,7 @@ use App\Models\LogAcesso;
 use Closure;
 use Illuminate\Http\Request;
 
-class LogAcessoMiddlaware
+class LogAcessoMiddleware
 {
     /**
      * Handle an incoming request.
