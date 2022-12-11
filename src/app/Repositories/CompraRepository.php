@@ -2,18 +2,12 @@
 
 namespace App\Repositories;
 
-
+use App\Repositories\Contracts\CompraRepositoryInterface;
 use App\Models\Compra;
 
-class CompraRepository {
+class CompraRepository extends AbstractRepository implements CompraRepositoryInterface {
 
-
-    public function all() 
-    {
-        $model = app(Compra::class);
-
-        return $model->all();
-    }
+    protected $model = Compra::class;
 
     public function findById(int $id): Compra
     {

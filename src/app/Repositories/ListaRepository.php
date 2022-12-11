@@ -3,13 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\Lista;
+use App\Repositories\Contracts\ListaRepositoryInterface;
 
-class ListaRepository {
+class ListaRepository extends AbstractRepository implements ListaRepositoryInterface {
 
-    public function all()
-    {
-        return Lista::all();
-    }
+    protected $model = Lista::class;
 
     public function findById(int $id): Lista
     {
