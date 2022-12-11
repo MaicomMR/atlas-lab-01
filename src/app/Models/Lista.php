@@ -12,6 +12,6 @@ class Lista extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome', 'sdad'
+        'nome', 'descricao'
     ];
 }

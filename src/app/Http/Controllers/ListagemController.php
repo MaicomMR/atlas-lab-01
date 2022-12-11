@@ -38,7 +38,7 @@ class ListagemController extends Controller
 
     public function mostrarLista(CompraRepository $model)
     {
-        $compras =  $model->all();
+        $compras = $model->all();
         return view('itens', ['compras'=> $compras]);
     }
 

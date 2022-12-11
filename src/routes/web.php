@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\ListaControllers\ShowAllListsController;
+use App\Http\Controllers\ListaControllers\CreateListController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,9 +23,9 @@ Route::get('/', function () {
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('Login');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/listas', ShowAllListsController::class)->middleware(['auth', 'verified'])->name('listas');
+Route::get('/lista/create', [\App\Http\Controllers\ListaControllers\CreateListPageController::class, 'index'])->middleware(['auth', 'verified'])->name('add-lista-page');
+Route::post('/lista/create', CreateListController::class)->middleware(['auth', 'verified'])->name('add-lista');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -31,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
+//Rotas de alteração de itens em cada lista
 Route::middleware(['auth', 'logAcesso'])->group(function () {
     Route::get('/comprar', [\App\Http\Controllers\ListagemController::class, 'index'])->name('comprar');
     Route::post('/comprar', [\App\Http\Controllers\ListagemController::class, 'comprar'])->name('comprar');
