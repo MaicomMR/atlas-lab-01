@@ -28,7 +28,7 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                {{ $slot ?? null }}
             </main>
         </div>
     </body>

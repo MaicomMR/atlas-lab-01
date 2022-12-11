@@ -8,8 +8,12 @@ class ListaRepository {
 
     public function all()
     {
-        $model = app(Lista::class);
-
-        return $model->all();
+        return Lista::all();
     }
+
+    public function findById(int $id): Lista
+    {
+        return Lista::find($id);
+    }
+
 }

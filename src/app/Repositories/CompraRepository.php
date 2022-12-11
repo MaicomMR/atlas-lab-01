@@ -15,15 +15,8 @@ class CompraRepository {
         return $model->all();
     }
 
-    public function findById(int $id)
+    public function findById(int $id): Compra
     {
-        $model = app(Compra::class);
-        return $model->find($id); 
-    }
-
-    public function deleteById(int $id)
-    {
-        $model = app(Compra::class);
-        $model->find($id)->delete();
+        return Compra::find($id);
     }
 }
