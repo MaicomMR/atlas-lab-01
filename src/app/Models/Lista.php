@@ -11,7 +11,10 @@ class Lista extends Model
     use SoftDeletes;
     use HasFactory;
 
-    protected $fillable = [
-        'nome', 'descricao'
-    ];
+    protected $fillable = ['nome', 'descricao'];
+
+    public function item() {
+        
+        return $this->belongsToMany(Item::class);
+    }
 }

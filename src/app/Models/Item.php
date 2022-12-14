@@ -6,9 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Compra extends Model
+class Item extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['compra', 'valor'];
     use HasFactory;
+
+    protected $fillable = ['compra', 'valor'];
+    protected $table = 'itens';
+
+    public function lista() 
+    {
+        return $this->hasOne(Order::class);
+    }
 }
