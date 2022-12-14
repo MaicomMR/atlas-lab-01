@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('listas', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 50);
-            $table->string('descricao', 100);
+            $table->string('descricao', 100)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

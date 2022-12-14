@@ -11,14 +11,12 @@
                 <table class="w-full whitespace-no-wrapw-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-center font-bold">
-                            <td class="border px-6 py-4">ID</td>
                             <td class="border px-6 py-4">Nome</td>
                             <td class="border px-6 py-4">Descricão</td>
                         </tr>
                     </thead>
                     @foreach($listas as $lista)
                         <tr>
-                            <td class="border px-6 py-4">{{$lista->id}}</td>
                             <td class="border px-6 py-4">{{$lista->nome}}</td>
                             <td class="border px-6 py-4">{{$lista->descricao}}</td>
                             <td class="border px-6 py-4">

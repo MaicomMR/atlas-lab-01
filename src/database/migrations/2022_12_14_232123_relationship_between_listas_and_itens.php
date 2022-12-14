@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('compras', function (Blueprint $table) {
-            $table->id();
-            $table->string('compra', 100);
-            $table->string('valor', 6);
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('itens', function (Blueprint $table) {
+            $table->foreign('lista_id')->references('id')->on('listas');
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('compras');
+        Schema::table('itens', function (Blueprint $table) {
+            $table->dropForeign(['lista_id']);
+        });
     }
 };

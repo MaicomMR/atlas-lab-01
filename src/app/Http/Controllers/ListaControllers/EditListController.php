@@ -17,8 +17,9 @@ class EditListController extends Controller
   {
       $id = $request->route('id');
 
-      $listas = $model->findById($id);
-      return view('formulario',['listas'=> $listas]);
+      $listaCompra = $model->findById($id);
+      
+      return view('formulario',['listaCompra'=> $listaCompra]);
   }
 
 }
