@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ListaControllers\ShowAllListsController;
 use App\Http\Controllers\ListaControllers\CreateListController;
+use App\Http\Controllers\ListaControllers\EditListController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,14 +24,16 @@ Route::get('/', function () {
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('Login');
 
-Route::get('/listas', ShowAllListsController::class)->middleware(['auth', 'verified'])->name('listas');
-Route::get('/lista/create', [\App\Http\Controllers\ListaControllers\CreateListPageController::class, 'index'])->middleware(['auth', 'verified'])->name('add-lista-page');
-Route::post('/lista/create', CreateListController::class)->middleware(['auth', 'verified'])->name('add-lista');
 
-Route::middleware('auth')->group(function () {
+
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/listas', ShowAllListsController::class)->name('listas');
+    Route::get('/listas/edit/{id}', EditListController::class)->name('listas.edit');
+    Route::get('/lista/create', [\App\Http\Controllers\ListaControllers\CreateListPageController::class, 'index'])->name('add-lista-page');
+    Route::post('/lista/create', CreateListController::class)->name('add-lista');
 });
 
 //Rotas de alteração de itens em cada lista

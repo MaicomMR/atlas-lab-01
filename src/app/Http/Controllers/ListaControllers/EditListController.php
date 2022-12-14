@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ListaControllers;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\ListaRepositoryInterface;
+use Illuminate\Http\Request;
 
 class EditListController extends Controller
 {
@@ -12,10 +13,12 @@ class EditListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-  public function __invoke(ListaRepositoryInterface $model)
+  public function __invoke(ListaRepositoryInterface $model, Request $request)
   {
-      $listas = $model->findById();
-      return view('listas.show-all-list',['listas'=> $listas]);
+      $id = $request->route('id');
+
+      $listas = $model->findById($id);
+      return view('formulario',['listas'=> $listas]);
   }
 
 }

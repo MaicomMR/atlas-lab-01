@@ -11,17 +11,23 @@
                 <table class="w-full whitespace-no-wrapw-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-center font-bold">
+                            <td class="border px-6 py-4">ID</td>
                             <td class="border px-6 py-4">Nome</td>
                             <td class="border px-6 py-4">Descricão</td>
-                            <td class="border px-6 py-4">Ações:</td>
                         </tr>
                     </thead>
                     @foreach($listas as $lista)
                         <tr>
+                            <td class="border px-6 py-4">{{$lista->id}}</td>
                             <td class="border px-6 py-4">{{$lista->nome}}</td>
                             <td class="border px-6 py-4">{{$lista->descricao}}</td>
-                            <td class="border px-6 py-4"></td>
-                            <button class="btn btn-sucess">Clique aqui</button>
+                            <td class="border px-6 py-4">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    Button
+                                  </button>
+                                <button type="button" onclick="window.location='{{ URL::route('listas.edit', ['id' => $lista->id]); }}'" class="btn btn-primary">Editar</button>
+                                <button type="button" class="btn btn-primary">Deletar</button>
+                            </td>
                         </tr>
                     @endforeach
                 </table>
