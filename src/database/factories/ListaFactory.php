@@ -16,8 +16,12 @@ class ListaFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
+        $listas = ['Floricultura', 'Mercado', 'Acougue'];
+        $rand = rand(0, (count($listas) -1) );
+
+            return [
+                'nome' => $listas[$rand]
+            ];
+
     }
 }
