@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('item', 100);
             $table->string('valor', 6)->nullable();
-            $table->unsignedBigInteger('lista_id');
+            $table->unsignedBigInteger('lista_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
