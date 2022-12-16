@@ -2,54 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Compra;
-use App\Repositories\CompraRepository;
+use App\Http\Requests\AddItemToList;
+use App\Models\Item;
+use App\Repositories\Contracts\ItemRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ListagemController extends Controller
 {
+
+    protected $itemRepository;
+
+    public function __construct(ItemRepositoryInterface $itemRepository)
+    {
+        $this->itemRepository = $itemRepository;
+    }
+
+
     public function index (){
         return view('formulario');
     }
 
-    public function comprar(Request $request)
+    public function comprar(AddItemToList $request)
     {
-        $compra = new Compra;
+        $validatedData = $request->validated();
+        $item = new Item;
+        $itens = $this->itemRepository->all();
 
-        $request->validate([
-            'compra1' => 'required|max:100|min:1|string',
-            'valor' => 'required|max:100|min:1|integer',
-            'quantidade' => 'required|max:100|min:1|integer'
-        ],
-        [
-            'compra1.required' => "O campo Produto é obrigatorio!",
-            'valor.required' => "O campo Valor é obrigatorio!",
-            'quantidade.required' => "O campo Quantidade é obrigatorio!",
-            'quantidade.integer' => "O campo Quantidade deve receber um numero!",
-            'valor.integer' => "O campo valor deve receber um numero!"
-        ]);
+        $item->lista_id = $validatedData['lista_id'];
+        $item->item = $validatedData['item'];
+        $item->valor = $validatedData['valor'];
+        
+        $item->save();
 
-             $compra->produto = $request->input('compra1');
-             $compra->valor = $request->input('valor');
-             $compra->quantidade = $request->input('quantidade');
-             $compra->save();
-         return view('itens');
+         return view('itens', ['itens' => $itens]);
     }
 
-    public function mostrarLista(CompraRepository $model)
+    public function mostrarLista()
     {
-        $compras = $model->all();
-        return view('itens', ['compras'=> $compras]);
+        $itens = $this->itemRepository->all();
+        return view('itens', ['itens'=> $itens]);
     }
 
-    public function deletar(Request $request, CompraRepository $model)
+    public function deletar(Request $request)
     {
         $id = $request->input('delete');
-        $delete = $model->findById($id);
-        if(!$delete) {
+        if(!$this->itemRepository->findById($id)) {
             return "Produto não encontrado";
         } else {
-            $model->deleteById($id);
+            // $model->deleteById($id);
             return redirect()->route('mostrarLista');
         }
     }

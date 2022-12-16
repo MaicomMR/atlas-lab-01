@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Lista;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,8 +19,11 @@ class ItemFactory extends Factory
     {
         $itens = ['papel higienico', 'Feijao', 'Arroz'];
         $rand = rand(0, (count($itens) -1) );
+        $lista = Lista::inRandomOrder()->first();
+
         return [
-            'item' => $itens[$rand]
+            'item' => $itens[$rand],
+            'lista_id' => $lista->id
         ];
     }
 }

@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('listas', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome', 50);
-            $table->string('descricao', 100)->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('listas', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -30,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('listas');
+        Schema::table('listas', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
     }
 };

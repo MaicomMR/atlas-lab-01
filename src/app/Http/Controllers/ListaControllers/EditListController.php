@@ -19,7 +19,7 @@ class EditListController extends Controller
 
       $listaCompra = $model->findById($id);
       
-      return view('formulario',['listaCompra'=> $listaCompra]);
+      return view('formulario', ['listaCompra'=> $listaCompra]);
   }
 
 }

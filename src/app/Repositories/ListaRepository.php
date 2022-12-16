@@ -9,9 +9,15 @@ class ListaRepository extends AbstractRepository implements ListaRepositoryInter
 
     protected $model = Lista::class;
 
-    public function findById(int $id): Lista
+    public function showAllLists()
     {
-        return Lista::find($id);
+        return $this->model::all();
+    }
+
+
+    public function findById($id)
+    {
+       return $this->model::where('id', $id)->first();
     }
 
 }

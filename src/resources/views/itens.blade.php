@@ -22,11 +22,11 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($compras as $compra)
+                                @foreach($itens as $item)
                                     <tr>
-                                        <th scope="row">{{$compra->id}}</th>
-                                        <td>{{$compra->produto}}</td>
-                                        <td>{{$compra->valor}}</td>
+                                        <th scope="row">{{$item->id}}</th>
+                                        <td>{{$item->item}}</td>
+                                        <td>{{$item->valor}}</td>
                                         <td>
                                             <a href="{{url('rm-compras')}}">Editar</a>
                                         </td>
