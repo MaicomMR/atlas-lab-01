@@ -13,4 +13,9 @@ class ItemRepository extends AbstractRepository implements ItemRepositoryInterfa
     {
         return $this->model::find($id);
     }
+
+    public function findItensByListId($lista_id)
+    {
+        return $this->model::where('lista_id', $lista_id)->get();
+    }
 }

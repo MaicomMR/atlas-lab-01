@@ -5,6 +5,7 @@ use App\Http\Controllers\ListaControllers\ShowAllListsController;
 use App\Http\Controllers\ListaControllers\CreateListController;
 use App\Http\Controllers\ListaControllers\DeleteListPageController;
 use App\Http\Controllers\ListaControllers\EditListController;
+use App\Http\Controllers\ListaControllers\ShowListWithItensController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/listas', ShowAllListsController::class)->name('listas');
+    Route::get('/listas/itens/{id}', ShowListWithItensController::class)->name('listas.itens');
     Route::get('/listas/edit/{id}', EditListController::class)->name('listas.edit');
     Route::get('/lista/create', [\App\Http\Controllers\ListaControllers\CreateListPageController::class, 'index'])->name('add-lista-page');
     Route::post('/lista/create', CreateListController::class)->name('add-lista');

@@ -17,7 +17,7 @@ class ListaSeeder extends Seeder
     public function run()
     {
         Lista::factory()
-            ->count(10)
+            ->count(2)
             ->create();
     }
 }
