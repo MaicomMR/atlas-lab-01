@@ -48,7 +48,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'logAcesso'])->group(function () {
     Route::get('/comprar', [\App\Http\Controllers\ListagemController::class, 'index'])->name('comprar');
     Route::post('/comprar/{id}', [\App\Http\Controllers\ListagemController::class, 'comprar'])->name('comprar');
-    Route::get('/comprar/add/{id}', [\App\Http\Controllers\ListagemController::class, 'adicionarItens'])->name('add.itens');
+    Route::post('/comprar/add/{id}', [\App\Http\Controllers\ListagemController::class, 'adicionarItens'])->name('add.itens');
     Route::get('/lista/total', [\App\Http\Controllers\ListagemController::class, 'mostrarLista'])->name('lista-compras');
     Route::put('lista/edit', [\App\Http\Controllers\ListagemController::class, 'update'])->name('editar-compras');
     Route::get('/lista/delete/{id}', [\App\Http\Controllers\ListagemController::class, 'deletar'])->name('rm-compras');

@@ -21,13 +21,18 @@
                             <td class="border px-6 py-4" style="text-align: center">{{$item->item}}</td>
                             <td class="border px-6 py-4" style="text-align: center">{{$item->quantidade}}</td>
                             <td class="border px-6 py-4" style="text-align: center" onclick="window.location='{{ URL::route('rm-compras', ['id' => $item->id])}}'">Remover item</td>
-                            <th class="border px-6 py-4" style="text-align: center" onclick="window.location='{{ URL::route('add.itens', ['id' => $item->id])}}'">Adicionar item:</th>
+                            <th class="border px-6 py-4" style="text-align: center">Adicionar itens:</th>
                             <td>
-                                <select name="quantidade" class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select></td>
+                                <form action="{{ route('add.itens', ['id' => $item->id]) }}" method="post">
+                                @csrf
+                                <select name="quantidade" id="quantidade" class="form-control">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                </select>
+                                <button style="text-align: center" class="btn btn-success" type="submit">Clique aqui para adicionar Itens</button>
+                            </form>
+                            </td>
                         </tr>
                         @endforeach
                     </thead>

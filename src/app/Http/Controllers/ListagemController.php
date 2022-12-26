@@ -6,6 +6,7 @@ use App\Http\Requests\AddItemToList;
 use App\Models\Item;
 use App\Models\Lista;
 use App\Repositories\Contracts\ItemRepositoryInterface;
+use App\Services\Contracts\ItemServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,10 +14,14 @@ class ListagemController extends Controller
 {
 
     protected $itemRepository;
+    protected $itemService;
 
-    public function __construct(ItemRepositoryInterface $itemRepository)
+    public function __construct(
+        ItemRepositoryInterface $itemRepository,
+        ItemServiceInterface $itemService)
     {
         $this->itemRepository = $itemRepository;
+        $this->itemService = $itemService;
     }
 
 
@@ -61,7 +66,11 @@ class ListagemController extends Controller
     public function adicionarItens(Request $request)
     {
         $itemId = $request->route('id');
-        $item = $this->itemRepository->findById($itemId);
-        dd($item);
+        $itensAdd = $request->input('quantidade');
+
+        $this->itemService->adicionarMaisItens($itemId, $itensAdd);
+
+        $listas = Lista::where('user_id', Auth::id())->get();
+        return view('listas.show-all-list',['listas'=> $listas]);
     }
 }
