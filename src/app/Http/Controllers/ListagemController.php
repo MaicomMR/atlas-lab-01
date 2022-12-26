@@ -53,13 +53,9 @@ class ListagemController extends Controller
     {
        $id = $request->route('id');
         
-        if(!$this->itemRepository->findById($id)) {
-            return "Produto não encontrado";
-        } else {
-            $item = $this->itemRepository->findById($id);
-            $item->delete();
-            return redirect()->back();
-        }
+        $item = $this->itemRepository->findById($id);
+        $item->delete();
+        return redirect()->back();
     }
 
     public function adicionarItens(Request $request)

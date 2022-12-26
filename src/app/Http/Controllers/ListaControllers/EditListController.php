@@ -8,16 +8,23 @@ use Illuminate\Http\Request;
 
 class EditListController extends Controller
 {
+    protected $listaRepository;
+
+
+    public function __construct(ListaRepositoryInterface $listaRepository)
+    {
+        $this->listaRepository = $listaRepository;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-  public function __invoke(ListaRepositoryInterface $model, Request $request)
+  public function __invoke(Request $request)
   {
       $id = $request->route('id');
 
-      $listaCompra = $model->findById($id);
+      $listaCompra = $this->listaRepository->findById($id);
       
       return view('formulario', ['listaCompra'=> $listaCompra]);
   }

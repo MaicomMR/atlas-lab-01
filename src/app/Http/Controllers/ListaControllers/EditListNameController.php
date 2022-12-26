@@ -20,7 +20,7 @@ class EditListNameController extends Controller
         ListaRepositoryInterface $listaRepository,
         ListServiceInterface $listaService
         )
-        {
+    {
        $this->listaRepository = $listaRepository;
        $this->listaService = $listaService;
     }
@@ -34,7 +34,7 @@ class EditListNameController extends Controller
         return view('listas.edit-list', ['listaCompra'=> $listaCompra, 'id' => $id]);
     }
 
-    public function editListData(ListaRepositoryInterface $listaRepository, ListServiceInterface $listaService, Request $request)
+    public function editListData(Request $request)
     {
         $id = $request->route('id');
 

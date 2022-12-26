@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CreateListController extends Controller {
 
-    private $listaRepository;
-
-    public function __construct(ListaRepositoryInterface $listaRepository)
-    {
-       $this->listaRepository = $listaRepository;
-    }
-
     public function __invoke(CreateListRequest $request)
     {
         $lista = new Lista;
@@ -24,12 +17,10 @@ class CreateListController extends Controller {
         $validatedData = $request->validated();
 
     try {
-
         $lista->nome = $validatedData['nome'];
         $lista->descricao = $validatedData['descricao'];
         $lista->user_id = Auth::id();
         $lista->save();
-
     } catch (\Illuminate\Database\QueryException $ex) {
         $error = $ex->getMessage();
         return redirect()->route('add-lista-page', ['error' => $error]);

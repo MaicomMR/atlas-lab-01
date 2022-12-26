@@ -18,7 +18,7 @@ class DeleteListPageController extends Controller
         ListServiceInterface $listaService,
         ListaRepositoryInterface $listaRepository
         )
-        {
+    {
        $this->listaService = $listaService;
        $this->listaRepository = $listaRepository;
     }

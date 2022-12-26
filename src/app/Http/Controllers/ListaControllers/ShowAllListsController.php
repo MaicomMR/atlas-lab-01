@@ -9,15 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ShowAllListsController extends Controller
 {
-
-    private $listaRepository;
-
-    public function __construct(ListaRepositoryInterface $listaRepository)
-    {
-       $this->listaRepository = $listaRepository;
-    }
-
-
     /**
      * Display a listing of the resource.
      *
