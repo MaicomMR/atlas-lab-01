@@ -32,9 +32,8 @@ class ListagemController extends Controller
     public function comprar(AddItemToList $request)
     {
         $validatedData = $request->validated();
-        $item = new Item;
-        $itens = $this->itemRepository->all();
 
+        $item = new Item;
         $item->lista_id = $validatedData['lista_id'];
         $item->item = $validatedData['item'];
         $item->quantidade = $validatedData['quantidade'];

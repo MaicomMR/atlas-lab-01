@@ -17,7 +17,6 @@ class CreateListController extends Controller {
        $this->listaRepository = $listaRepository;
     }
 
-
     public function __invoke(Request $request)
     {
         $lista = new Lista;
