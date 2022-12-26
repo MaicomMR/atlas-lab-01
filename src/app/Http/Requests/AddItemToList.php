@@ -25,7 +25,7 @@ class AddItemToList extends FormRequest
     {
         return [
         'item' => 'required|max:100|min:1|string',
-        'quantidade' => 'required|max:100|min:1',
+        'quantidade' => 'required|max:100|min:1|integer',
         'lista_id' => 'required|integer'    
         ];
     }
@@ -35,6 +35,7 @@ class AddItemToList extends FormRequest
         return [
         'item.required' => "O campo Produto é obrigatorio!",
         'quantidade.required' => "O campo quantidade é obrigatorio!",
+        'quantidade.integer' => "O campo quantidade deve receber um numero",
         ];
     }
 }
