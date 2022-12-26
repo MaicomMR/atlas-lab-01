@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('itens', function (Blueprint $table) {
             $table->id();
             $table->string('item', 100);
-            $table->string('valor', 6)->nullable();
+            $table->string('quantidade', 6)->nullable();
             $table->unsignedBigInteger('lista_id')->nullable();
             $table->timestamps();
             $table->softDeletes();

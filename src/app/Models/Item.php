@@ -11,7 +11,7 @@ class Item extends Model
     use SoftDeletes;
     use HasFactory;
 
-    protected $fillable = ['item', 'valor'];
+    protected $fillable = ['item', 'quantidade'];
     protected $table = 'itens';
 
     public function lista() 

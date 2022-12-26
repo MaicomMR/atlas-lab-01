@@ -30,12 +30,18 @@ class CreateListController extends Controller {
             'nome.required' => "O campo Nome é obrigatorio!",
         ]);
 
+    try {
 
         $lista->nome = $request->nome;
         $lista->descricao = $request->descricao;
         $lista->user_id = Auth::id();
         $lista->save();
 
-        return view ('dashboard');
+    } catch (\Illuminate\Database\QueryException $ex) {
+        $error = $ex->getMessage();
+        return redirect()->route('add-lista-page', ['error' => $error]);
+    }
+        $listas = Lista::where('user_id', Auth::id())->get();
+        return view('listas.show-all-list',['listas'=> $listas]);
     }
 }

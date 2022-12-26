@@ -14,6 +14,11 @@
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Nome da lista:</span>
                             <input value="{{old('nome')}}" name="nome" type="text" placeholder="Compras da mês" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            @if ($errors->any())
+                             <span class="invalid-feedback" role="alert">
+                                <strong>{{ $error ?? null }}</strong>
+                             </span>
+                            @enderror
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Descrição:</span>

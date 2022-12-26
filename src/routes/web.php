@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\ListaControllers\EditListNameController;
 use App\Http\Controllers\ListaControllers\ShowAllListsController;
 use App\Http\Controllers\ListaControllers\CreateListController;
 use App\Http\Controllers\ListaControllers\DeleteListPageController;
@@ -35,6 +36,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/listas', ShowAllListsController::class)->name('listas');
     Route::get('/listas/itens/{id}', ShowListWithItensController::class)->name('listas.itens');
     Route::get('/listas/edit/{id}', EditListController::class)->name('listas.edit');
+    Route::get('/listas/editname/{id}', [EditListNameController::class, 'redirectToEditListBlade'])->name('listas.editName');
+    Route::post('/listas/editname/{id}', [EditListNameController::class, 'editListData'])->name('listas.editNamePost');
     Route::get('/lista/create', [\App\Http\Controllers\ListaControllers\CreateListPageController::class, 'index'])->name('add-lista-page');
     Route::post('/lista/create', CreateListController::class)->name('add-lista');
     Route::get('/listas/delete', DeleteListPageController::class)->name('delete.list');
@@ -45,10 +48,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'logAcesso'])->group(function () {
     Route::get('/comprar', [\App\Http\Controllers\ListagemController::class, 'index'])->name('comprar');
     Route::post('/comprar/{id}', [\App\Http\Controllers\ListagemController::class, 'comprar'])->name('comprar');
+    Route::get('/comprar/add/{id}', [\App\Http\Controllers\ListagemController::class, 'adicionarItens'])->name('add.itens');
     Route::get('/lista/total', [\App\Http\Controllers\ListagemController::class, 'mostrarLista'])->name('lista-compras');
     Route::put('lista/edit', [\App\Http\Controllers\ListagemController::class, 'update'])->name('editar-compras');
-    Route::delete('/lista/delete', [\App\Http\Controllers\ListagemController::class, 'deletar'])->name('rm-compras');
+    Route::get('/lista/delete/{id}', [\App\Http\Controllers\ListagemController::class, 'deletar'])->name('rm-compras');
     Route::post('/lista/add', [\App\Http\Controllers\ListagemController::class, 'comprar'])->name('add-compras');
+});
+
+Route::fallback(function () {
+    return redirect()->route('listas');
 });
 
 require __DIR__.'/auth.php';

@@ -13,12 +13,21 @@
                     <thead>
                         <tr class="text-center font-bold">
                             <td class="border px-6 py-4" style="text-align: center">Item</td>
-                            <td class="border px-6 py-4" style="text-align: center">Valor</td>
+                            <td class="border px-6 py-4" style="text-align: center">Quantidade</td>
+                            
                         </tr>
                         @foreach($itens as $item)
                         <tr class="text-center font-bold">
                             <td class="border px-6 py-4" style="text-align: center">{{$item->item}}</td>
-                            <td class="border px-6 py-4" style="text-align: center">{{$item->valor}}</td>
+                            <td class="border px-6 py-4" style="text-align: center">{{$item->quantidade}}</td>
+                            <td class="border px-6 py-4" style="text-align: center" onclick="window.location='{{ URL::route('rm-compras', ['id' => $item->id])}}'">Remover item</td>
+                            <th class="border px-6 py-4" style="text-align: center" onclick="window.location='{{ URL::route('add.itens', ['id' => $item->id])}}'">Adicionar item:</th>
+                            <td>
+                                <select name="quantidade" class="form-control">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select></td>
                         </tr>
                         @endforeach
                     </thead>

@@ -18,7 +18,7 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Produto</th>
-                                    <th scope="col">Valor</th>
+                                    <th scope="col">Quantidade</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -26,9 +26,9 @@
                                     <tr>
                                         <th scope="row">{{$item->id}}</th>
                                         <td>{{$item->item}}</td>
-                                        <td>{{$item->valor}}</td>
+                                        <td>{{$item->quantidade}}</td>
                                         <td>
-                                            <a href="{{url('rm-compras')}}">Editar</a>
+                                            <a href="{{url('rm-compras', ['id', $item->id])}}">Editar</a>
                                         </td>
                                         <td>
                                             <a href="{{url('/lista/delete')}}">Deletar</a>
@@ -37,7 +37,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <form style="margin-top: 30px" method="post" action="{{route('rm-compras')}}">
+                            <form style="margin-top: 30px" method="post" action="{{route('rm-compras', ['id', $item->id])}}">
                                 @csrf
                                 @method('delete')
                                 <span >Qual desses itens você gostaria de deletar anjo? Insira o ID do item dentro do campo ao lado:</span>

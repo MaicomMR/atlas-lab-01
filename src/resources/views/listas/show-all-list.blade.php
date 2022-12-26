@@ -22,6 +22,7 @@
                             <td class="border px-6 py-4">
                                 <form method="DELETE">
                                 <button type="button" onclick="window.location='{{ URL::route('listas.edit', ['id' => $lista->id]); }}'" class="btn btn-primary">Adicionar itens</button>
+                                <button type="button" onclick="window.location='{{ URL::route('listas.editName', ['id' => $lista->id]); }}'" class="btn btn-primary">Editar nome</button>
                                 <button type="button" onclick="window.location='{{ URL::route('listas.itens', ['id' => $lista->id]); }}'" class="btn btn-primary">Listar itens</button>
                                 <button type="button" onclick="window.location='{{ URL::route('delete.list', ['id' => $lista->id]); }}'" class="btn btn-primary">Deletar Lista</button>
                                 </form>

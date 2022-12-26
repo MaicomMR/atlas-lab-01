@@ -36,9 +36,9 @@
                                     <input value="{{old('item')}}" name="item" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                 </div>
                                 <div class="input-group input-group-sm mb-3">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Valor:</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Quantidade:</span>
 
-                                    <input value="{{old('valor')}}" name="valor" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <input value="{{old('quantidade')}}" name="quantidade" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                 </div>
                                 <button class="btn btn-success" type="submit">Adicionar a lista</button>
                                 <input name="lista_id" type="hidden" value="{{$listaCompra->id ?? null}}">

@@ -21,4 +21,13 @@ class ListService implements ListServiceInterface {
         $lista = $this->listaRepository->findById($id);
         $lista->delete();
     }
+
+    public function saveNewData($id, $newData)
+    {
+        $lista = $this->listaRepository->findById($id);
+
+        $lista->nome = $newData['nome'];
+        $lista->descricao = $newData['descricao'];
+        $lista->save();
+    }
 }

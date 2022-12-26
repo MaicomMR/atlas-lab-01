@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddItemToList;
 use App\Models\Item;
+use App\Models\Lista;
 use App\Repositories\Contracts\ItemRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ListagemController extends Controller
 {
@@ -30,11 +32,11 @@ class ListagemController extends Controller
 
         $item->lista_id = $validatedData['lista_id'];
         $item->item = $validatedData['item'];
-        $item->valor = $validatedData['valor'];
-        
+        $item->quantidade = $validatedData['quantidade'];
         $item->save();
-
-         return view('itens', ['itens' => $itens]);
+        
+        $listas = Lista::where('user_id', Auth::id())->get();
+        return view('listas.show-all-list',['listas'=> $listas]);
     }
 
     public function mostrarLista()
@@ -45,17 +47,21 @@ class ListagemController extends Controller
 
     public function deletar(Request $request)
     {
-        $id = $request->input('delete');
+       $id = $request->route('id');
+        
         if(!$this->itemRepository->findById($id)) {
             return "Produto não encontrado";
         } else {
-            // $model->deleteById($id);
-            return redirect()->route('mostrarLista');
+            $item = $this->itemRepository->findById($id);
+            $item->delete();
+            return redirect()->back();
         }
     }
 
-    public function update(Request $request)
+    public function adicionarItens(Request $request)
     {
-
+        $itemId = $request->route('id');
+        $item = $this->itemRepository->findById($itemId);
+        dd($item);
     }
 }

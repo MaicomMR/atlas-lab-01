@@ -31,8 +31,7 @@ class DeleteListPageController extends Controller
         $id = $this->listaRepository->findById($newId);
         $this->listaService->deleteList($newId);
 
-        return view('dashboard');
-
-
+        $listas = Lista::where('user_id', Auth::id())->get();
+        return view('listas.show-all-list',['listas'=> $listas]);
     }
 }

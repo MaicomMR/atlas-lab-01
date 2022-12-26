@@ -9,7 +9,7 @@ class ItemRepository extends AbstractRepository implements ItemRepositoryInterfa
 
     protected $model = Item::class;
 
-    public function findById(int $id): Item
+    public function findById($id)
     {
         return $this->model::find($id);
     }

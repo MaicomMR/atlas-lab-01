@@ -27,6 +27,7 @@ class ShowListWithItensController extends Controller
         $lista_id = preg_replace("/\D/","", $rota);
         $newId = intval($lista_id);
         $itens = $this->itemRepository->findItensByListId($newId);
+        
         return view('listas.show-list-itens', ['itens' => $itens]);
     }
 }
