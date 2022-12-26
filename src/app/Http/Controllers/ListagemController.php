@@ -69,7 +69,6 @@ class ListagemController extends Controller
 
         $this->itemService->adicionarMaisItens($itemId, $itensAdd);
 
-        $listas = Lista::where('user_id', Auth::id())->get();
-        return view('listas.show-all-list',['listas'=> $listas]);
+        return redirect()->back();
     }
 }
