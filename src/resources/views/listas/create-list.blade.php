@@ -6,6 +6,15 @@
         </h2>
     </x-slot>
 
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -14,11 +23,6 @@
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Nome da lista:</span>
                             <input value="{{old('nome')}}" name="nome" type="text" placeholder="Compras da mês" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                            @if ($errors->any())
-                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $error ?? null }}</strong>
-                             </span>
-                            @enderror
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Descrição:</span>

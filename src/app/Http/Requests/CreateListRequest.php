@@ -13,7 +13,7 @@ class CreateListRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class CreateListRequest extends FormRequest
     public function rules()
     {
         return [
-                'nome' => 'required|max:100|min:1|string',
+                'nome' => 'required|max:100|min:1|string|unique:listas,nome',
                 'descricao' => 'required|max:100|min:1',
         ]; 
     }
@@ -34,6 +34,7 @@ class CreateListRequest extends FormRequest
     {
         return [
             'nome.required' => "O campo Nome é obrigatorio!",
+            'nome.unique' => "Nome já existente",
         ];
     }
 

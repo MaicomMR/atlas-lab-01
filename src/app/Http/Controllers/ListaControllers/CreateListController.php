@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\ListaControllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateListRequest;
 use App\Models\Lista;
 use App\Repositories\Contracts\ListaRepositoryInterface;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CreateListController extends Controller {
@@ -17,22 +17,16 @@ class CreateListController extends Controller {
        $this->listaRepository = $listaRepository;
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(CreateListRequest $request)
     {
         $lista = new Lista;
 
-        $request->validate([
-            'nome' => 'required|max:100|min:1|string',
-            'descricao' => 'required|max:100|min:1',
-        ],
-        [
-            'nome.required' => "O campo Nome é obrigatorio!",
-        ]);
+        $validatedData = $request->validated();
 
     try {
 
-        $lista->nome = $request->nome;
-        $lista->descricao = $request->descricao;
+        $lista->nome = $validatedData['nome'];
+        $lista->descricao = $validatedData['descricao'];
         $lista->user_id = Auth::id();
         $lista->save();
 
