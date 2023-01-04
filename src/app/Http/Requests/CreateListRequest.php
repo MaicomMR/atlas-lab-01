@@ -34,6 +34,7 @@ class CreateListRequest extends FormRequest
     {
         return [
             'nome.required' => "O campo Nome é obrigatorio!",
+            'nome.max' => "O campo nome deve ter no maximo 100 caracteres",
             'nome.unique' => "Nome já existente",
         ];
     }
