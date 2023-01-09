@@ -20,4 +20,9 @@ class ListaRepository extends AbstractRepository implements ListaRepositoryInter
        return $this->model::where('id', $id)->first();
     }
 
+    public function ShowAllListByAuthId($user_id)
+    {
+        return $this->model::where('user_id', $user_id)->get();
+    }
+
 }

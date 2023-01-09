@@ -9,4 +9,6 @@ interface ListaRepositoryInterface {
     public function findById($id);
 
     public function showAllLists();
+
+    public function ShowAllListByAuthId($user_id);
 }

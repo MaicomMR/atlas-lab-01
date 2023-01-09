@@ -41,8 +41,9 @@ class EditListNameController extends Controller
         $newData = $request->all();
 
         $this->listaService->saveNewData($id, $newData);
-
-        $listas = Lista::where('user_id', Auth::id())->get();
+        
+        $user_id = Auth::id();
+        $listas = $this->listaRepository->ShowAllListByAuthId($user_id);
         return view('listas.show-all-list',['listas'=> $listas]);
     }
 }

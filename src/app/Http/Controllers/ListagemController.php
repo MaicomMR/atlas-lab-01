@@ -6,6 +6,7 @@ use App\Http\Requests\AddItemToList;
 use App\Models\Item;
 use App\Models\Lista;
 use App\Repositories\Contracts\ItemRepositoryInterface;
+use App\Repositories\Contracts\ListaRepositoryInterface;
 use App\Services\Contracts\ItemServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,14 +15,18 @@ class ListagemController extends Controller
 {
 
     protected $itemRepository;
+    protected $listaRepository;
     protected $itemService;
 
     public function __construct(
         ItemRepositoryInterface $itemRepository,
-        ItemServiceInterface $itemService)
+        ItemServiceInterface $itemService,
+        ListaRepositoryInterface $listaRepository
+        )
     {
         $this->itemRepository = $itemRepository;
         $this->itemService = $itemService;
+        $this->listaRepository = $listaRepository;
     }
 
 
@@ -39,7 +44,8 @@ class ListagemController extends Controller
         $item->quantidade = $validatedData['quantidade'];
         $item->save();
         
-        $listas = Lista::where('user_id', Auth::id())->get();
+        $user_id = Auth::id();
+        $listas = $this->listaRepository->ShowAllListByAuthId($user_id);
         return view('listas.show-all-list',['listas'=> $listas]);
     }
 

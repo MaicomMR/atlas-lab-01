@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class CreateListController extends Controller {
 
+    protected $listaRepository;
+
+    public function __construct(ListaRepositoryInterface $listaRepository)
+    {
+       $this->listaRepository = $listaRepository;
+    }
+
     public function __invoke(CreateListRequest $request)
     {
         $lista = new Lista;
@@ -25,7 +32,8 @@ class CreateListController extends Controller {
         $error = $ex->getMessage();
         return redirect()->route('add-lista-page', ['error' => $error]);
     }
-        $listas = Lista::where('user_id', Auth::id())->get();
+        $user_id = Auth::id();
+        $listas = $this->listaRepository->ShowAllListByAuthId($user_id);
         return view('listas.show-all-list',['listas'=> $listas]);
     }
 }
