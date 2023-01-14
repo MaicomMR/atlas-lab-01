@@ -16,6 +16,10 @@ services:
       - laravel
     depends_on:
       - database
+  redis:
+    image: redis:6.0-alpine
+    networks:
+      - laravel
   nginx:
     image: nginx:stable
     container_name: nginx-al

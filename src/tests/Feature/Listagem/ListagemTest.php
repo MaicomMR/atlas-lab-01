@@ -3,10 +3,14 @@
 namespace Tests\Feature\Listagem;
 
 use App\Models\Lista;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
 class ListagemTest extends TestCase
 {
+    use RefreshDatabase, WithoutMiddleware;
 
     /** @test */
     public function only_logged_users_can_access_shop_list()
@@ -18,17 +22,37 @@ class ListagemTest extends TestCase
 
     /** @test */
     public function create_new_list()
-    {
-        $lista = Lista::factory()->create(['nome' => 'Lista phpunit Mercado']);
+    {       
 
-        $lista->refresh();
+        $lista = Lista::factory()->make(['nome' => 'teste 2 Mercado', 'descricao' => 'teste description']);
+        $user = User::factory()->create();
+        $this->actingAs($user);
+       $result = $this->post('/lista/create', [
+                'nome' => $lista->nome,
+                'descricao' => $lista->descricao,
+        ]);
 
-        $this->assertEquals('Lista phpunit Mercado', $lista->nome);
-        $this->assertNull($lista->descricao);
-        $this->assertNull($lista->user_id);
 
-        $lista = Lista::factory()->create(['nome' => 'Lista phpunit Mercado', 'descricao' => NULL]);
-
-        $this->assertNull($lista->descricao);
+        $this->assertDatabaseHas('listas', [
+            'nome' => $lista->nome
+        ]);
     }
+
+     /** @test */
+     public function check_if_form_request_validated_description()
+     {       
+ 
+         $user = User::factory()->create();
+         $this->actingAs($user);
+      
+ 
+         $this->postJson('/lista/create')
+         ->assertJsonValidationErrors('nome')
+         ->assertJsonValidationErrors('descricao');
+
+         $this->postJson('/lista/create', [
+            'nome' => 'nome test'
+         ])
+         ->assertJsonValidationErrors('descricao');
+     }
 }
